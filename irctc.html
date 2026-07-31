@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRCTC Next Generation eTicketing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top Utility Bar -->
+    <div class="top-utility-bar">
+        <span>🇮🇳 Indian Railways - eTicketing System</span>
+        <div class="top-utility-links">
+            <span id="currentClock"></span>
+            <button id="askDishaBtn">Ask Disha AI</button>
+            <button id="contactUsBtn">Contact Us</button>
+            <button id="hindiBtn">Hindi</button>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header>
+        <div class="main-header">
+            <div class="brand-box" id="brandHome">
+                <div class="brand-logo">IR</div>
+                <div class="brand-title">
+                    <h1>IRCTC</h1>
+                    <p>Connecting India</p>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a class="active" data-section="trains">IRCTC HOME</a></li>
+                <li><a data-section="flights">FLIGHTS</a></li>
+                <li><a data-section="hotels">HOTELS</a></li>
+                <li><a data-section="drishti">RAIL DRISHTI</a></li>
+                <li><a data-section="contact">CONTACT</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="btn-login">LOGIN</button>
+                <button id="registerBtn" class="btn-register">REGISTER</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- TRAINS SECTION -->
+    <div id="trainsSection" class="main-section-view">
+        <section class="hero-section">
+            <div class="booking-wrapper">
+                <div class="service-tabs">
+                    <div class="tab-item active" data-tab="book">🚆 BOOK TICKET</div>
+                    <div class="tab-item" data-tab="pnr">📊 PNR STATUS</div>
+                    <div class="tab-item" data-tab="charts">📉 CHARTS / VACANCY</div>
+                </div>
+
+                <div class="booking-form-container">
+                    <div id="bookTabContent" class="tab-content">
+                        <div class="form-title-row">
+                            <h2>Book Your Journey</h2>
+                            <a class="pnr-enquiry-link" id="goToPnrLink">Check PNR Status &gt;</a>
+                        </div>
+                        <form id="irctcSearchForm">
+                            <div class="search-grid">
+                                <div class="input-card"><label>From</label><input type="text" id="fromStation" value="NEW DELHI - NDLS" required></div>
+                                <div class="input-card"><label>To</label><input type="text" id="toStation" value="HOWRAH - HWH" required></div>
+                                <div class="input-card"><label>Date of Journey</label><input type="date" id="journeyDate" required></div>
+                                <div class="input-card"><label>Quota</label><select><option>GENERAL</option><option>TATKAL</option></select></div>
+                            </div>
+                            <button type="submit" class="btn-search">Search Trains</button>
+                        </form>
+                    </div>
+
+                    <div id="pnrTabContent" class="tab-content" style="display: none;">
+                        <div class="form-title-row"><h2>PNR Enquiry</h2></div>
+                        <form id="pnrForm">
+                            <div class="input-card" style="margin-bottom:20px;"><label>10-digit PNR</label><input type="text" placeholder="Enter PNR" maxlength="10" required></div>
+                            <button type="submit" class="btn-search">Get PNR Status</button>
+                        </form>
+                    </div>
+
+                    <div id="chartsTabContent" class="tab-content" style="display: none;">
+                        <div class="form-title-row"><h2>Explore Chart / Vacancy</h2></div>
+                        <form id="chartForm">
+                            <div class="search-grid" style="margin-bottom:20px;">
+                                <div class="input-card"><label>Train No</label><input type="text" value="12302" required></div>
+                                <div class="input-card"><label>Date</label><input type="date" required></div>
+                            </div>
+                            <button type="submit" class="btn-search">Get Chart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="resultsSection" style="display: none;">
+            <div class="results-header-banner">
+                <h3 id="resultsRouteHeading">Available Trains</h3>
+                <button id="closeResultsBtn" style="background:transparent; border:1px solid white; color:white; padding:4px 10px; border-radius:4px; cursor:pointer;">Close</button>
+            </div>
+            <div class="results-list-container">
+                <div class="train-result-card">
+                    <div><h4 style="color:var(--irctc-blue)">12302 - HOWRAH RAJDHANI</h4></div>
+                    <div class="class-badge" id="trainBadge"><div style="font-weight:800; color:var(--irctc-blue)">3A</div><div style="font-size:12px; color:#16a34a;">AVAILABLE</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLIGHTS SECTION -->
+    <div id="flightsSection" class="main-section-view" style="display: none;">
+        <section class="hero-section">
+            <div class="booking-wrapper">
+                <div class="booking-form-container">
+                    <div class="form-title-row"><h2>Air Ticket Booking</h2></div>
+                    <form id="flightForm">
+                        <div class="search-grid" style="margin-bottom:20px;">
+                            <div class="input-card"><label>From</label><input type="text" value="New Delhi (DEL)"></div>
+                            <div class="input-card"><label>To</label><input type="text" value="Mumbai (BOM)"></div>
+                        </div>
+                        <button type="submit" class="btn-search">Search Flights</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- HOTELS SECTION -->
+    <div id="hotelsSection" class="main-section-view" style="display: none;">
+        <section class="hero-section">
+            <div class="booking-wrapper">
+                <div class="booking-form-container">
+                    <div class="form-title-row"><h2>Hotel Accommodation</h2></div>
+                    <form id="hotelForm">
+                        <div class="input-card" style="margin-bottom:20px;"><label>City</label><input type="text" value="Varanasi"></div>
+                        <button type="submit" class="btn-search">Search Hotels</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- DRISHTI SECTION -->
+    <div id="drishtiSection" class="main-section-view" style="display: none;">
+        <div style="max-width:800px; margin:40px auto; background:white; padding:30px; border-radius:10px;">
+            <h2 style="color:var(--irctc-blue); margin-bottom:10px;">Rail Drishti Dashboard</h2>
+            <p>Live transparency portal for Indian Railways operations and punctuality stats.</p>
+        </div>
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <div id="contactSection" class="main-section-view" style="display: none;">
+        <div style="max-width:800px; margin:40px auto; background:white; padding:30px; border-radius:10px;">
+            <h2 style="color:var(--irctc-blue); margin-bottom:10px;">Contact Customer Care</h2>
+            <p>Helpline Number: <strong>14646</strong> | Email: care@irctc.co.in</p>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal-backdrop">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>IRCTC Login</h3>
+                <span class="close-btn" id="closeLogin">&times;</span>
+            </div>
+            <form id="loginForm">
+                <div class="input-card" style="margin-bottom:15px;"><label>User ID</label><input type="text" placeholder="Enter User ID" required></div>
+                <div class="input-card" style="margin-bottom:20px;"><label>Password</label><input type="password" placeholder="Enter Password" required></div>
+                <button type="submit" class="btn-search">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- REGISTER MODAL -->
+    <div id="registerModal" class="modal-backdrop">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Create IRCTC Account</h3>
+                <span class="close-btn" id="closeRegister">&times;</span>
+            </div>
+            <form id="registerForm">
+                <div class="input-card" style="margin-bottom:12px;"><label>User ID</label><input type="text" placeholder="Unique User ID" required></div>
+                <div class="input-card" style="margin-bottom:12px;"><label>Email</label><input type="email" placeholder="abc@gmail.com" required></div>
+                <div class="input-card" style="margin-bottom:20px;"><label>Mobile</label><input type="tel" placeholder="10-digit mobile" required></div>
+                <button type="submit" class="btn-search">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
